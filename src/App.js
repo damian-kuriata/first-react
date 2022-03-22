@@ -1,25 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {useEffect} from "react";
+import {Link, NavLink, Outlet, useLocation, useNavigate, useParams, useSearchParams} from "react-router-dom";
+import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
+import CollectData from "./CollectData";
+import DisplayFile from  "./DisplayFile";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+            <>
+            <nav>
+                <li>
+                    <NavLink to="/collect" style={
+                        ({ isActive }) =>  isActive? {color: "red"}:{color: "pink"}
+                    }>Collect data</NavLink>
+                </li>
+                <li>
+                    <NavLink to="/preview" style={
+                        ({ isActive }) =>  isActive? {color: "red"}:{color: "pink"}
+                    }>Preview</NavLink>
+                </li>
+            </nav>
+
+            <Routes>
+                <Route path="/" element={<Navigate to="/collect" />} />
+                <Route path="/collect" index element={<CollectData />} />
+                <Route path="/preview" element={<DisplayFile />} />
+                <Route path="*" element={<h1>Page not found.</h1>} />
+            </Routes>
+                </>
+
+
+    );
 }
 
 export default App;
